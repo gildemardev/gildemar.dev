@@ -2,13 +2,11 @@
 
 Esse portfólio deve ser o meu definitivo por um bom tempo, esse repositório serve para documentar minha evolução e é livre para ser clonado e modificado.
 
-## A fazer:
+## Features:
 
-- Escolher biblioteca de ícones;
-- Escolher entre gsap ou framer motion;
-- Fazer transição entre páginas;
-- Instalar smooth scroll;
-- Formulário de contato.
+- NextJS
+- Ícones: [HeroIcons](https://heroicons.com/solid)
+- Animações: [Framer Motion](https://heroicons.com/solid)
 
 ## Futuras features:
 
@@ -16,6 +14,12 @@ Esse portfólio deve ser o meu definitivo por um bom tempo, esse repositório se
 - Blog com MDX;
 - Selfhost;
 - Integração do formulário de contato com algum email sender.
+
+## A fazer:
+
+- Fazer transição entre páginas;
+- Instalar smooth scroll;
+- Formulário de contato.
 
 ## Desafios:
 
