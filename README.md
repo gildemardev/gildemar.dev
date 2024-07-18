@@ -22,4 +22,5 @@ Esse portfólio deve ser o meu definitivo por um bom tempo, esse repositório se
 - Não usar bibliotecas de ui prontas.
 - Manter o design original e ao mesmo tempo minimalista.
 - Fazer o deploy com Dockerfile.
+- Utilizar HTML semântico.
 - Manter o [padrão de commits](https://gitmoji.dev/)
