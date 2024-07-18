@@ -11,6 +11,7 @@ export default function Home() {
 		// TODO: Atualizar as cores para css variables
 		<main className='flex min-h-screen flex-col items-center px-24 py-10 bg-blue-800 text-blue-100'>
 			<section className='max-w-3xl'>
+				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
 				<Paragraph>
 					Especializado em micro interações, posso agregar no seu projeto.
