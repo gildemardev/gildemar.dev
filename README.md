@@ -12,6 +12,7 @@ Esse portfólio deve ser o meu definitivo por um bom tempo, esse repositório se
 
 ## Futuras features:
 
+- Modo claro e modo escuro
 - Blog com MDX;
 - Selfhost;
 - Integração do formulário de contato com algum email sender.
