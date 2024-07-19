@@ -27,15 +27,15 @@ export default function Home() {
 					e engajar, criando um vínculo contínuo entre o cliente e o serviço.
 				</Paragraph>
 				<Paragraph>
-					Desde 2014, trabalho na área do design como social media e motion
-					designer. Participei da transição de posts em formato de imagem, sem
-					movimento, para os vídeos curtos que dispararam em popularidade no
-					marketing. Porquê não aplicar isso ao web design?
+					Desde 2017, trabalhei inicialmente como social media e motion designer
+					e iniciei também na programação. Participei da transição de posts em
+					formato de imagem, sem movimento, para os vídeos curtos que dispararam
+					em popularidade no marketing. Porquê não aplicar isso ao web design?
 				</Paragraph>
 				<Paragraph>
-					Com minha experiência em motion design, trago uma perspectiva única
-					para o desenvolvimento de interfaces. Micro interações não são apenas
-					uma tendência, mas uma necessidade para se destacar no mercado digital
+					Com minha experiência trago uma perspectiva única para o
+					desenvolvimento de interfaces. Micro interações não são apenas uma
+					tendência, mas uma necessidade para se destacar no mercado digital
 					atual. Esses pequenos detalhes fazem com que os usuários se sintam
 					valorizados e proporcionam uma sensação de fluidez e continuidade na
 					navegação.
@@ -44,8 +44,8 @@ export default function Home() {
 					Se você busca transformar seu projeto em algo mais do que um simples
 					site, estou aqui para ajudar. Juntos, podemos criar experiências
 					digitais que não apenas atendem às expectativas dos usuários, mas as
-					superam. Vamos explorar o poder do motion design para converter e
-					fidelizar seus clientes.
+					superam. Vamos explorar o poder do motion para converter e fidelizar
+					seus clientes.
 				</Paragraph>
 				<Paragraph>Atualmente estou trabalhando em 3 side projects:</Paragraph>
 				<ul className='text-lg space-y-2 mt-2'>
