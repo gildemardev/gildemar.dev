@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Paragraph from "@/typhography/Paragraph";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
 	return (
 		// TODO: Atualizar as cores para css variables
 		<main className='flex min-h-screen flex-col items-center px-5 sm:px-12 md:px-24 py-10 bg-blue-800 text-blue-100'>
-			<section className='max-w-3xl'>
+			<section className='max-w-3xl pb-10'>
 				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
 				<Paragraph>
@@ -58,6 +59,7 @@ export default function Home() {
 					preencher o formulário abaixo.
 				</Paragraph>
 			</section>
+			<Footer />
 		</main>
 	);
 }
