@@ -19,7 +19,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='pt-br'>
-			<body className={cn("antialiased", bitter.className)}>{children}</body>
+			<body className={cn("antialiased", bitter.variable, inter.variable)}>
+				{children}
+			</body>
 		</html>
 	);
 }
