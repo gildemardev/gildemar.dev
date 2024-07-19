@@ -8,7 +8,10 @@ interface ParagraphProps extends React.ComponentPropsWithoutRef<"p"> {
 const Paragraph = ({ children, className = "", ...props }: ParagraphProps) => {
 	return (
 		<p
-			className={cn("leading-7 mt-6 first:mt-0 text-lg", className)}
+			className={cn(
+				"leading-7 mt-6 first:mt-0 text-lg text-justify",
+				className
+			)}
 			{...props}>
 			{children}
 		</p>
