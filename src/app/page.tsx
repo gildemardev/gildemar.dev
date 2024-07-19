@@ -16,7 +16,7 @@ export default function Home() {
 				<Paragraph>
 					Especializado em micro interações, posso agregar no seu projeto.
 					Vivemos em uma geração onde a atenção do usuário é capturada nos
-					primeiros segundos de acesso . Ação e movimento resumem tudo!
+					primeiros segundos de acesso. Ação e movimento resumem tudo!
 				</Paragraph>
 				<Paragraph>
 					Softwares são mais do que meros programas ou sites; eles são
