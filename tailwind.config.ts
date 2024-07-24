@@ -19,7 +19,7 @@ const config: Config = {
         "card-foreground": "hsl(var(--card-foreground))",
         alert: "hsl(var(--alert))",
         "alert-foreground": "hsl(var(--alert-foreground))",
-        vorder: "hsl(var(--border))",
+        border: "hsl(var(--border))",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
