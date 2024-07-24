@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 0 0% 9%;
+		--foreground: 41 100% 96%;
+
+		--primary: 227 100% 25%;
+		--primary-foreground: 227 100% 85%;
+
+		--card: 0 0% 0%;
+		--card-foreground: 41 100% 96%;
+
+		--alert: 41 100% 57%;
+		--alert-foreground: 29 100% 6%;
+
+		--border: 0 0% 22%;
+	}
+
+	.dark {
+		/* TODO: Aqui ficará as variaveis do modo dark */
+	}
+}

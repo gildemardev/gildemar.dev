@@ -8,9 +8,7 @@ const Footer: FC = () => {
 			<p>
 				2024. Feito por{" "}
 				<strong>
-					<a
-						className='hover:underline hover:text-orange-500 transition-colors'
-						href='https://www.gildemar.dev'>
+					<a className='hover:underline' href='https://www.gildemar.dev'>
 						@gildemar.dev
 					</a>
 				</strong>
