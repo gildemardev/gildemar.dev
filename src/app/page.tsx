@@ -13,7 +13,7 @@ export default function Home() {
 		<main
 			className='flex min-h-screen flex-col items-center
 			px-5 sm:px-12 md:px-24 py-10
-			bg-alert text-alert-foreground'>
+			bg-background text-foreground'>
 			<section className='max-w-3xl pb-10'>
 				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
