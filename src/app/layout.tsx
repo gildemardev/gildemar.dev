@@ -19,7 +19,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='pt-br'>
-			<body className={cn("antialiased", bitter.variable, inter.variable)}>
+			<body
+				className={cn(
+					"antialiased selection:bg-[#00ffea] selection:text-black",
+					bitter.variable,
+					inter.variable
+				)}>
 				{children}
 			</body>
 		</html>
