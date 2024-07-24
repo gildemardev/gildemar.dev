@@ -52,7 +52,7 @@ export default function Home() {
 					seus clientes.
 				</Paragraph>
 				<Paragraph>Atualmente estou trabalhando em 3 side projects:</Paragraph>
-				<ul className='text-lg space-y-2 mt-2'>
+				<ul className='text-lg space-y-2 mt-2 font-sans'>
 					{sideProjects.map((sideProject, index) => {
 						return <li key={index}>{`=> ${sideProject}`}</li>;
 					})}
