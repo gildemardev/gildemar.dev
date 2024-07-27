@@ -1,5 +1,8 @@
-import Footer from "@/components/Footer";
+"use client";
+import { motion as m } from "framer-motion";
+
 import Paragraph from "@/typhography/Paragraph";
+import Footer from "@/components/Footer";
 
 export default function Home() {
 	const sideProjects = [
@@ -9,11 +12,7 @@ export default function Home() {
 	];
 
 	return (
-		// TODO: Atualizar as cores para css variables
-		<main
-			className='flex min-h-screen flex-col items-center
-			px-5 sm:px-12 md:px-24 py-10
-			bg-background text-foreground'>
+		<m.main className=''>
 			<section className='max-w-3xl pb-10'>
 				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
@@ -52,17 +51,17 @@ export default function Home() {
 					seus clientes.
 				</Paragraph>
 				<Paragraph>Atualmente estou trabalhando em 3 side projects:</Paragraph>
-				<ul className='text-lg space-y-2 mt-2 font-sans'>
+				<ul id='projects' className='text-lg space-y-2 mt-2 font-sans'>
 					{sideProjects.map((sideProject, index) => {
 						return <li key={index}>{`=> ${sideProject}`}</li>;
 					})}
 				</ul>
-				<Paragraph>
+				<Paragraph id='contact'>
 					Quer saber mais ou simplesmente falar comigo? Sinta-se à vontade para
 					preencher o formulário abaixo.
 				</Paragraph>
 			</section>
 			<Footer />
-		</main>
+		</m.main>
 	);
 }
