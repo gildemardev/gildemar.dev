@@ -1,5 +1,9 @@
+"use client";
+import { useScroll, useTransform, motion as m } from "framer-motion";
+
 import Footer from "@/components/Footer";
 import Paragraph from "@/typhography/Paragraph";
+import { useRef } from "react";
 
 export default function Home() {
 	const sideProjects = [
@@ -8,12 +12,24 @@ export default function Home() {
 		"Uma ferramenta de IA que pode assessorar diretamente seu atendimento e suas vendas.",
 	];
 
+	const ref = useRef(null);
+	const { scrollYProgress } = useScroll({ target: ref });
+
+	const backgroundColor = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["#000000", "#0000FF"]
+	);
+	const color = useTransform(scrollYProgress, [0, 1], ["#0000FF", "#000000"]);
+
 	return (
 		// TODO: Atualizar as cores para css variables
-		<main
+		<m.main
+			ref={ref}
+			style={{ backgroundColor, color }}
 			className='flex min-h-screen flex-col items-center
-			px-5 sm:px-12 md:px-24 py-10
-			bg-background text-foreground'>
+			px-5 sm:px-12 md:px-24 py-10'>
+			{/* bg-background text-foreground */}
 			<section className='max-w-3xl pb-10'>
 				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
@@ -63,6 +79,6 @@ export default function Home() {
 				</Paragraph>
 			</section>
 			<Footer />
-		</main>
+		</m.main>
 	);
 }
