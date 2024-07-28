@@ -24,9 +24,9 @@ const AnimatedElement: FC<AnimatedElementProps> = () => {
 						ease: "easeInOut",
 					},
 				}}>
-				{/* Modifica o tamango nesse Span com o size */}
-				<span className='absolute flex items-center justify-center z-10 pointer-events-none select-none size-20'>
-					{/* TODO: Integrar nextImage */}
+				{/* Modifica o tamanho nesse Span com o size */}
+				<span className='absolute flex items-center justify-center z-10 pointer-events-none select-none size-24'>
+					{/* TODO: Integrar nextImage e tirar o alt de alguma forma impossibilitar de ser lido*/}
 					<img
 						src='/burro.png'
 						alt='Holofote'
