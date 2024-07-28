@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Bitter, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { useRef } from "react";
-import { useScroll, useTransform } from "framer-motion";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const bitter = Bitter({ subsets: ["latin"], variable: "--font-serif" });
@@ -23,7 +21,7 @@ export default function RootLayout({
 		<html lang='pt-br' className='scroll-smooth'>
 			<body
 				className={cn(
-					"antialiased selection:bg-[#00ffea] selection:text-black bg-background text-foreground ",
+					"antialiased selection:bg-[#00ffea] selection:text-black bg-background text-foreground overflow-x-hidden min-h-screen",
 					bitter.variable,
 					inter.variable
 				)}>
