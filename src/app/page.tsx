@@ -1,5 +1,5 @@
 "use client";
-import { motion as m, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 import AnimatedElement from "@/components/AnimatedElement";
@@ -21,7 +21,7 @@ export default function Home() {
 	return (
 		<>
 			<AnimatedElement />
-			<m.main
+			<motion.main
 				ref={ref}
 				style={{ backgroundColor }}
 				className='flex  flex-col items-center px-5 sm:px-12 md:px-24 py-10'>
@@ -72,7 +72,7 @@ export default function Home() {
 					</Paragraph>
 				</section>
 				<Footer />
-			</m.main>
+			</motion.main>
 		</>
 	);
 }
