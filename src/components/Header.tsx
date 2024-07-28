@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Header: FC = () => {
 	return (
-		<nav className='max-w-3xl w-full pb-8 flex justify-between uppercase'>
+		<nav className='max-w-3xl w-full pb-8 flex flex-col sm:flex-row gap-2 justify-between uppercase'>
 			<h1 className='font-sans text-xl font-bold tracking-tighter'>Gildemar</h1>
 			<ul className='inline-flex items-center gap-4 font-sans'>
 				<li className='hover:underline cursor-pointer'>
