@@ -8,8 +8,7 @@ const bitter = Bitter({ subsets: ["latin"], variable: "--font-serif" });
 
 export const metadata: Metadata = {
 	title: "Portfolio - GildemarDev",
-	description:
-		"Webdesigner especializado em micro interações. Entre em contato em gil@gildemar.dev",
+	description: "Webdesigner especializado em micro interações.",
 };
 
 export default function RootLayout({
