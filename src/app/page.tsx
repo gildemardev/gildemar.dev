@@ -1,18 +1,28 @@
 "use client";
-import { motion as m } from "framer-motion";
+import { motion as m, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 import Paragraph from "@/typhography/Paragraph";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import BentoGrid from "@/components/BentoGrid";
 
 export default function Home() {
-	const sideProjects = [
-		"Um CRM para marketing direto.",
-		"Um sistema de cardápio online e gerenciamento de atendimentos.",
-		"Uma ferramenta de IA que pode assessorar diretamente seu atendimento e suas vendas.",
-	];
+	const ref = useRef(null);
+	const { scrollYProgress } = useScroll({ target: ref });
+
+	const backgroundColor = useTransform(
+		scrollYProgress,
+		[0, 1],
+		["#141414", "#000000"]
+	);
 
 	return (
-		<m.main className=''>
+		<m.main
+			ref={ref}
+			style={{ backgroundColor }}
+			className='flex min-h-screen flex-col items-center px-5 sm:px-12 md:px-24 py-10'>
+			<Header />
 			<section className='max-w-3xl pb-10'>
 				{/* TODO: Enfatizar algumas frases com a tag strong */}
 				<Paragraph>Motion Designer & Fullstack Developer.</Paragraph>
@@ -50,12 +60,7 @@ export default function Home() {
 					superam. Vamos explorar o poder do motion para converter e fidelizar
 					seus clientes.
 				</Paragraph>
-				<Paragraph>Atualmente estou trabalhando em 3 side projects:</Paragraph>
-				<ul id='projects' className='text-lg space-y-2 mt-2 font-sans'>
-					{sideProjects.map((sideProject, index) => {
-						return <li key={index}>{`=> ${sideProject}`}</li>;
-					})}
-				</ul>
+				<BentoGrid />
 				<Paragraph id='contact'>
 					Quer saber mais ou simplesmente falar comigo? Sinta-se à vontade para
 					preencher o formulário abaixo.
