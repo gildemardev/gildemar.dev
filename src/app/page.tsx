@@ -2,11 +2,13 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-import AnimatedElement from "@/components/AnimatedElement";
 import Paragraph from "@/typhography/Paragraph";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import BentoGrid from "@/components/BentoGrid";
+
+import AnimatedElementRight from "@/components/AnimatedElementRight";
+import AnimatedElementLeft from "@/components/AnimatedElementLeft";
 
 export default function Home() {
 	const ref = useRef(null);
@@ -20,7 +22,12 @@ export default function Home() {
 
 	return (
 		<>
-			<AnimatedElement />
+			<div className='fixed right-20'>
+				<AnimatedElementRight />
+			</div>
+			<div className='fixed -top-10'>
+				<AnimatedElementLeft />
+			</div>
 			<motion.main
 				ref={ref}
 				style={{ backgroundColor }}
