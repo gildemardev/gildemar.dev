@@ -1,13 +1,44 @@
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
-interface AnimatedElementProps {}
-
-const AnimatedElement: FC<AnimatedElementProps> = () => {
+const AnimatedElement: FC = () => {
 	const { scrollY } = useScroll();
-	// TODO: Responsividade do starter point
-	const xTransform = useTransform(scrollY, [0, 1000], [0, 200]);
+	const [xTransformRange, setXTransformRange] = useState<[number, number]>([
+		0, 200,
+	]);
+
+	useEffect(() => {
+		const mediaQuerySmall = window.matchMedia("(max-width: 767px)");
+		const mediaQueryMedium = window.matchMedia(
+			"(min-width: 768px) and (max-width: 1023px)"
+		);
+
+		const updateRange = () => {
+			if (mediaQuerySmall.matches) {
+				setXTransformRange([0, 200]);
+			} else if (mediaQueryMedium.matches) {
+				setXTransformRange([100, 800]);
+			} else {
+				setXTransformRange([150, 1800]);
+			}
+		};
+
+		// Inicializa o breakpoint de acordo com a tela
+		updateRange();
+
+		// Listeners para observar caso precise dar update
+		mediaQuerySmall.addEventListener("change", updateRange);
+		mediaQueryMedium.addEventListener("change", updateRange);
+
+		// Remove os listeners quando não são mais necessários
+		return () => {
+			mediaQuerySmall.removeEventListener("change", updateRange);
+			mediaQueryMedium.removeEventListener("change", updateRange);
+		};
+	}, []);
+
+	const xTransform = useTransform(scrollY, [0, 1000], xTransformRange);
 
 	return (
 		<motion.div
