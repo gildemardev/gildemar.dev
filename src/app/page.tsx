@@ -22,7 +22,7 @@ export default function Home() {
 
 	return (
 		<>
-			<div className='fixed right-20'>
+			<div className='fixed right-24'>
 				<AnimatedElementRight />
 			</div>
 			<div className='fixed -top-10'>
