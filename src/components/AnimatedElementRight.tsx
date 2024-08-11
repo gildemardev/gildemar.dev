@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FC } from "react";
 
 const AnimatedElementRight: FC = () => {
@@ -18,10 +19,8 @@ const AnimatedElementRight: FC = () => {
 						ease: "easeInOut",
 					},
 				}}>
-				{/* Modifica o tamanho nesse Span com o size */}
 				<span className='absolute flex h-[500px] w-[150px] z-10 pointer-events-none select-none '>
-					{/* TODO: Integrar nextImage e tirar o alt de alguma forma impossibilitar de ser lido*/}
-					<img
+					<Image
 						src='/image.png'
 						height={425}
 						width={150}
