@@ -20,6 +20,7 @@ const AnimatedElement: FC = () => {
 			} else if (mediaQueryMedium.matches) {
 				setXTransformRange([100, 800]);
 			} else {
+				// TODO: Estudar se o valor pode diminuir, achei muito brusco
 				setXTransformRange([150, 1800]);
 			}
 		};
