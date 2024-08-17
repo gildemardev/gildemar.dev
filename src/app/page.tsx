@@ -31,7 +31,7 @@ export default function Home() {
 			<motion.main
 				ref={ref}
 				style={{ backgroundColor }}
-				className='flex  flex-col items-center px-5 sm:px-12 md:px-24 py-10'>
+				className='flex flex-col items-center px-5 sm:px-12 md:px-24 py-10'>
 				<Header />
 				<section className='max-w-3xl pb-10'>
 					{/* TODO: Enfatizar algumas frases com a tag strong */}

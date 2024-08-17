@@ -21,13 +21,13 @@ export default async function Post({ params }: { params: { slug: string } }) {
 	const { data, content } = matter(fileContent);
 
 	return (
-		<section className=''>
+		<article>
 			<Image
 				src={data.image}
 				alt={data.title}
 				width={1200}
 				height={600}
-				className='w-full h-64 object-cover rounded-lg mb-8'
+				className='w-full h-96 object-cover rounded-lg mb-8'
 			/>
 			<h1 className='text-4xl font-bold mb-4 '>{data.title}</h1>
 			<div className='mb-8'>
@@ -49,6 +49,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
 				<h2 className='text-2xl font-semibold mb-4'>Comentários</h2>
 				<p>Os comentários serão implementados em breve.</p>
 			</div>
-		</section>
+		</article>
 	);
 }
