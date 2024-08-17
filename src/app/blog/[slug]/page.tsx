@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import matter from "gray-matter";
 import Image from "next/image";
+import { overrideMDXComponents } from "@/components/blog/CustomComponents";
 
 export async function generateStaticParams() {
 	const postsDirectory = path.join(process.cwd(), "posts");
@@ -37,6 +38,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
 			<div>
 				<MDXRemote
 					source={content}
+					components={overrideMDXComponents}
 					options={{
 						mdxOptions: {
 							rehypePlugins: [rehypeHighlight],
