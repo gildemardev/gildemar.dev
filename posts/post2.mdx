@@ -1,0 +1,315 @@
+---
+id: 2
+title: "Promp do claudio"
+date: "2024-08-17"
+author: "Alice Desenvolvedor"
+tags: ["Next.js", "React", "Web Development"]
+image: "/images/canute2.jpg"
+---
+
+Quero que você faça ajustes em um código antigo que tenho para utilizar novas tecnologias, pode me ajudar? É um webscrapper do aliexpress. Quero que seja implementado typescript e que seja exportado de modo que eu possa utilizar as funções em uma rota de API usando express.
+
+Mudanças as serem feitas: Use pupeteer com o browserless e quero que use o puppeteer-extra-plugin-stealth, não esquece de usar express e typescript
+
+Aqui a primeira parte do código a ser refatorado:
+
+```ts
+import puppeteer from "puppeteer";
+import * as cheerio from "cheerio";
+
+import { get as GetVariants } from "./variants.js";
+import { get as GetReviews } from "./reviews.js";
+import { get as GetShippingDetails } from "./shipping.js";
+
+const AliexpressProductScraper = async (
+	id,
+	{ reviewsCount = 20, filterReviewsBy = "all", puppeteerOptions = {} } = {}
+) => {
+	if (!id) {
+		throw new Error("Please provide a valid product id");
+	}
+
+	let browser;
+
+	try {
+		const REVIEWS_COUNT = reviewsCount || 20;
+		browser = await puppeteer.launch({
+			headless: "new",
+			...(puppeteerOptions || {}),
+		});
+		const page = await browser.newPage();
+
+		/** Scrape the aliexpress product page for details */
+		await page.goto(`https://www.aliexpress.com/item/${id}.html`);
+		const aliExpressData = await page.evaluate(() => runParams);
+
+		const data = aliExpressData?.data;
+		if (!data) {
+			throw new Error("No data found");
+		}
+
+		const shipping = GetShippingDetails(
+			data?.webGeneralFreightCalculateComponent?.originalLayoutResultList || []
+		);
+
+		/** Scrape the description page for the product using the description url */
+		const descriptionUrl = data?.productDescComponent?.descriptionUrl;
+		let descriptionDataPromise = null;
+		if (descriptionUrl) {
+			descriptionDataPromise = page.goto(descriptionUrl).then(async () => {
+				const descriptionPageHtml = await page.content();
+				const $ = cheerio.load(descriptionPageHtml);
+				return $("body").html();
+			});
+		}
+
+		const reviewsPromise = GetReviews({
+			productId: id,
+			limit: REVIEWS_COUNT,
+			total: data.feedbackComponent.totalValidNum,
+			filterReviewsBy,
+		});
+
+		const [descriptionData, reviews] = await Promise.all([
+			descriptionDataPromise,
+			reviewsPromise,
+		]);
+
+		await browser.close();
+
+		/** Build the JSON response with aliexpress product details */
+		const json = {
+			title: data.productInfoComponent.subject,
+			categoryId: data.productInfoComponent.categoryId,
+			productId: data.productInfoComponent.id,
+			quantity: {
+				total: data.inventoryComponent.totalQuantity,
+				available: data.inventoryComponent.totalAvailQuantity,
+			},
+			description: descriptionData,
+			orders: data.tradeComponent.formatTradeCount,
+			storeInfo: {
+				name: data.sellerComponent.storeName,
+				logo: data.sellerComponent.storeLogo,
+				companyId: data.sellerComponent.companyId,
+				storeNumber: data.sellerComponent.storeNum,
+				isTopRated: data.sellerComponent.topRatedSeller,
+				hasPayPalAccount: data.sellerComponent.payPalAccount,
+				ratingCount: data.storeFeedbackComponent.sellerPositiveNum,
+				rating: data.storeFeedbackComponent.sellerPositiveRate,
+			},
+			ratings: {
+				totalStar: 5,
+				averageStar: data.feedbackComponent.evarageStar,
+				totalStartCount: data.feedbackComponent.totalValidNum,
+				fiveStarCount: data.feedbackComponent.fiveStarNum,
+				fourStarCount: data.feedbackComponent.fourStarNum,
+				threeStarCount: data.feedbackComponent.threeStarNum,
+				twoStarCount: data.feedbackComponent.twoStarNum,
+				oneStarCount: data.feedbackComponent.oneStarNum,
+			},
+			images: (data.imageComponent && data.imageComponent.imagePathList) || [],
+			reviews,
+			variants: GetVariants({
+				optionsLists: data?.skuComponent?.productSKUPropertyList || [],
+				priceLists: data?.priceComponent?.skuPriceList || [],
+			}),
+			specs: data.productPropComponent.props,
+			currencyInfo: data.currencyComponent,
+			originalPrice: {
+				min: data.priceComponent.origPrice.minAmount,
+				max: data.priceComponent.origPrice.maxAmount,
+			},
+			salePrice: {
+				min: data.priceComponent.discountPrice.minActivityAmount,
+				max: data.priceComponent.discountPrice.maxActivityAmount,
+			},
+			shipping,
+		};
+
+		return json;
+	} catch (error) {
+		console.error(error);
+		if (browser) {
+			await browser.close();
+		}
+		throw error;
+	}
+};
+
+export default AliexpressProductScraper;
+```
+
+Agora os arquivos que foram importados acima:
+
+reviews.js
+
+```ts
+import fetch from "node-fetch";
+import { faker } from "@faker-js/faker";
+
+const getReview = (review) => {
+	const gender = review.buyerGender === "M" ? "male" : "female";
+	const displayName = faker.person.fullName({
+		sex: gender,
+	});
+
+	const data = {
+		anonymous: review.anonymous,
+		name: review.buyerName || displayName,
+		displayName,
+		gender,
+		country: review.buyerCountry || faker.location.countryCode("alpha-2"),
+		rating: review?.buyerEval ? review.buyerEval / 20 : 5,
+		info: review.skuInfo,
+		date: review.evalDate,
+		content: review.buyerFeedback,
+		photos: review.images || [],
+		thumbnails: review.thumbnails || [],
+	};
+
+	return data;
+};
+
+const get = async ({ productId, total, limit, filterReviewsBy = "all" }) => {
+	let allReviews = [];
+	const COUNT_PER_PAGE = 20;
+
+	// if reviews limit requested is less than total reviews, then limit it to total reviews
+	let count = limit;
+	if (limit >= total) {
+		count = total;
+	}
+
+	let totalPages = Math.ceil(count / COUNT_PER_PAGE);
+	if (totalPages >= 5) {
+		totalPages = 5;
+	}
+
+	for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+		const reviewUrl = `https://feedback.aliexpress.com/pc/searchEvaluation.do?productId=${productId}&page=${currentPage}&pageSize=${COUNT_PER_PAGE}&filter=${filterReviewsBy}`;
+		const review = await fetch(reviewUrl);
+		const reviewJson = await review.json();
+
+		const reviews = reviewJson?.data?.evaViewList || [];
+
+		if (!reviews) {
+			return allReviews;
+		}
+
+		reviews.forEach((_review) => {
+			const data = getReview(_review);
+			allReviews.push(data);
+		});
+	}
+
+	return allReviews;
+};
+
+export { get };
+```
+
+shipping.js
+
+```ts
+const getShippingData = (shippingData) => {
+	const shippingOptions = shippingData?.map((shippingOption) => {
+		const {
+			deliveryProviderName,
+			tracking,
+			provider,
+			company,
+			shipFrom,
+			shipFromCode,
+			shipTo,
+			shipToCode,
+			deliveryDayMax,
+			deliveryDayMin,
+			composeEtaMixDate,
+			composeEtaMaxDate,
+			shippingFee,
+			formattedAmount,
+			displayAmount,
+			displayCurrency,
+			warehouseType,
+		} = shippingOption?.bizData || {};
+
+		const hasShippingFee = shippingFee === "charge";
+
+		const returnData = {
+			deliveryProviderName,
+			tracking,
+			provider,
+			company,
+			deliveryInfo: {
+				min: deliveryDayMin,
+				max: deliveryDayMax,
+				displayMin: composeEtaMixDate,
+				displayMan: composeEtaMaxDate,
+			},
+			shippingInfo: {
+				from: shipFrom,
+				fromCode: shipFromCode,
+				to: shipTo,
+				toCode: shipToCode,
+				fees: hasShippingFee ? formattedAmount : 0,
+			},
+			warehouseType,
+		};
+
+		if (hasShippingFee) {
+			returnData.shippingInfo.displayAmount = displayAmount;
+			returnData.shippingInfo.displayCurrency = displayCurrency;
+		}
+
+		return returnData;
+	});
+
+	return shippingOptions;
+};
+
+export { getShippingData as get };
+```
+
+variants.js
+
+```ts
+const get = ({ priceLists = [], optionsLists = [] }) => {
+	priceLists = priceLists || [];
+	optionsLists = optionsLists || [];
+
+	const options = optionsLists.map((list) => {
+		return {
+			id: list.skuPropertyId,
+			name: list.skuPropertyName,
+			values: list.skuPropertyValues.map((val) => {
+				return {
+					id: val.propertyValueId,
+					name: val.propertyValueName,
+					displayName: val.propertyValueDisplayName,
+					image: val.skuPropertyImagePath,
+				};
+			}),
+		};
+	});
+
+	const lists = priceLists.map((list) => {
+		return {
+			skuId: list.skuId,
+			optionValueIds: list.skuPropIds,
+			availableQuantity: list.skuVal.availQuantity,
+			originalPrice: list.skuVal.skuAmount,
+			salePrice: list.skuVal.skuActivityAmount,
+		};
+	});
+
+	// console.log({ options, lists });
+
+	return {
+		options: options,
+		prices: lists,
+	};
+};
+
+export { get };
+```
