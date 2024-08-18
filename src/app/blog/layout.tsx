@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
-import "highlight.js/styles/github-dark.css";
+import "@/styles/vesper-code-highlight.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
