@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import PostLink from "@/components/blog/postLink";
+import PostLink from "@/components/blog/PostLink";
 
 interface PostMetadata {
 	id: number;
