@@ -5,9 +5,13 @@ import rehypeHighlight from "rehype-highlight";
 import matter from "gray-matter";
 import Image from "next/image";
 import { overrideMDXComponents } from "@/components/blog/CustomComponents";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
 	const postsDirectory = path.join(process.cwd(), "posts");
+	if (!fs.existsSync(postsDirectory)) {
+		return []; // Caso não tenha posts retorna vazio
+	}
 	const files = fs.readdirSync(postsDirectory);
 
 	return files.map((filename) => ({
@@ -18,6 +22,12 @@ export async function generateStaticParams() {
 export default async function Post({ params }: { params: { slug: string } }) {
 	const { slug } = params;
 	const filePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
+
+	// Verifica se o arquivo da slug existe
+	if (!fs.existsSync(filePath)) {
+		return notFound();
+	}
+
 	const fileContent = fs.readFileSync(filePath, "utf8");
 	const { data, content } = matter(fileContent);
 
@@ -46,7 +56,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
 					}}
 				/>
 			</div>
-			{/* Espaço reservado para comentários futuros */}
 			<div className='mt-12'>
 				<h2 className='text-2xl font-semibold mb-4'>Comentários</h2>
 				<p>Os comentários serão implementados em breve.</p>
