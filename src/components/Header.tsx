@@ -13,10 +13,10 @@ const Header: FC = () => {
 					<Link href={"/blog"}>Blog</Link>
 				</li>
 				<li className='hover:underline cursor-pointer'>
-					<a href='#projects'>Projetos</a>
+					<a href='/#projects'>Projetos</a>
 				</li>
 				<li className='hover:underline cursor-pointer'>
-					<a href='#contact'>Contato</a>
+					<a href='/#contact'>Contato</a>
 				</li>
 			</ul>
 		</nav>
