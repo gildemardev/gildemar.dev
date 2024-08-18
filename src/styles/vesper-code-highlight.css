@@ -1,0 +1,105 @@
+/* custom-highlight-theme.css */
+
+pre {
+	background-color: #1e1e1e;
+	border-radius: 0.5rem;
+	margin-top: 1.5rem;
+	padding: 1rem;
+	overflow-x: auto; /* Adiciona rolagem horizontal */
+	white-space: pre; /* Mantém a formatação do código */
+}
+
+code {
+	font-family: "Consolas", "Monaco", "Andale Mono", "Ubuntu Mono", monospace;
+	color: #fff;
+	display: block; /* Garante que o código ocupe toda a largura do pre */
+}
+
+.hljs-comment,
+.hljs-quote {
+	color: #595959;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #fff;
+}
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #ffc799;
+}
+
+.hljs-attribute {
+	color: #99ffe4;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #99ffe4;
+}
+
+.hljs-title,
+.hljs-section {
+	color: #ffc799;
+}
+
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #fbadff;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+
+/* Additional styles based on your theme */
+.hljs-attr {
+	color: #ffc799;
+}
+
+.hljs-function {
+	color: #ffc799;
+}
+
+.hljs-constant {
+	color: #99ffe4;
+}
+
+.hljs-class {
+	color: #ffc799;
+}
+
+.hljs-decorator {
+	color: #ffff;
+}
+
+.hljs-tag {
+	color: #ffc799;
+}
+
+.hljs-operator {
+	color: #fbadff;
+}
+
+.hljs-punctuation {
+	color: #fff;
+}
