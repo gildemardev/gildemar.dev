@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import PostLink from "@/components/blog/PostLink";
 
 import { FaceFrownIcon, LinkIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 interface PostMetadata {
 	id: number;
@@ -71,12 +72,12 @@ export default function BlogPage() {
 					<p className='text-lg text-center mt-3'>
 						POSTAGENS EM BREVE!
 						<br />
-						<a
+						<Link
 							href='/'
 							className='text-primary-foreground/50 hover:underline inline-flex items-center uppercase text-sm'>
 							<LinkIcon className='size-4 mr-1 mb-0.5' />
 							Voltar para a home
-						</a>
+						</Link>
 					</p>
 				</div>
 			)}
