@@ -46,8 +46,10 @@ export default function BlogPage() {
 	const posts = getPostMetadata();
 
 	return (
-		<div className='container mx-auto py-8'>
-			<h1 className='text-3xl font-bold mb-8'>Blog Posts</h1>
+		<section className='max-w-3xl w-full pb-10 flex flex-col py-8'>
+			<h1 className='text-6xl font-serif tracking-wide leading-tight mb-8'>
+				Inspirações, ideias e códigos.
+			</h1>
 			{posts.length > 0 ? (
 				<div className='grid grid-cols-2 gap-6'>
 					{posts.map((post) => (
@@ -55,11 +57,11 @@ export default function BlogPage() {
 					))}
 				</div>
 			) : (
-				<p className=''>
+				<p className='w-full bg-green-200 text-black'>
 					Nenhum post encontrado. Adicione arquivos MDX ao diretório
 					&apos;posts&apos;.
 				</p>
 			)}
-		</div>
+		</section>
 	);
 }

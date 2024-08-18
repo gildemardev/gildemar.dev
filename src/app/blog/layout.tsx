@@ -17,7 +17,7 @@ export default function BlogLayout({
 	return (
 		<main className='font-sans flex flex-col items-center px-5 sm:px-12 md:px-24 py-10'>
 			<Header />
-			<section className='max-w-3xl pb-10'>{children}</section>
+			{children}
 			<Footer />
 		</main>
 	);
