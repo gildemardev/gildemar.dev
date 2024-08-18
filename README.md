@@ -7,11 +7,11 @@ Esse portfólio deve ser o meu definitivo por um bom tempo, esse repositório se
 - NextJS
 - Ícones: [HeroIcons](https://heroicons.com/solid)
 - Animações: [Framer Motion](https://heroicons.com/solid)
+- Blog com MDX;
 
 ## Futuras features:
 
-- Modo claro e modo escuro
-- Blog com MDX;
+- Modo claro e modo escuro;
 - Selfhost;
 - Integração do formulário de contato com algum email sender.
 
