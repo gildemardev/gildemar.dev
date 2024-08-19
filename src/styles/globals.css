@@ -23,3 +23,9 @@
 		/* TODO: Aqui ficará as variaveis do modo dark */
 	}
 }
+
+@layer utilities {
+	.backdrop-blur-sm {
+		backdrop-filter: blur(4px);
+	}
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bitter, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+import TransitionLayout from "@/components/TransitionLayout";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const bitter = Bitter({ subsets: ["latin"], variable: "--font-serif" });
@@ -24,7 +25,7 @@ export default function RootLayout({
 					bitter.variable,
 					inter.variable
 				)}>
-				{children}
+				<TransitionLayout>{children}</TransitionLayout>
 			</body>
 		</html>
 	);
