@@ -24,8 +24,11 @@
 	}
 }
 
-@layer utilities {
-	.backdrop-blur-sm {
-		backdrop-filter: blur(4px);
+@layer base {
+	.cool-background {
+		background-image: repeating-conic-gradient(#000000 0% 25%, #0c0c0c 0% 50%);
+		background-position: 0 0, 10px 10px;
+		background-size: 20px 20px;
+		background-color: #0c0c0c;
 	}
 }
